@@ -1,5 +1,3 @@
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/tanilolli/CloudlogTCI/releases)
-
 # CloudlogTCI
 TCI bridge for Cloudlog
 
