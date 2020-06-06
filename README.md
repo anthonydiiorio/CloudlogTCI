@@ -3,7 +3,13 @@ TCI bridge for Cloudlog
 
 ![Terminal](/screenshots/term.png)
 
-## Build
+## Instructions
+
+Go get dependencies
+
+> go get ./...
+
+Build
 
 > go build cloudlogtci.go
 
