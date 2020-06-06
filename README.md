@@ -1,3 +1,5 @@
+[![](https://img.shields.io/github/v/release/tanilolli/CloudlogTCI)](https://github.com/tanilolli/CloudlogTCI/releases)
+
 # CloudlogTCI
 TCI bridge for Cloudlog
 
