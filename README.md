@@ -4,7 +4,7 @@
 # CloudlogTCI
 TCI bridge for [Cloudlog](https://github.com/magicbug/Cloudlog), an excellent web based loggin software for amateur radio.
 
-TCI is a modern alternative to serial based rig control by Expert Electronics, based on WebSockets. 
+TCI is a modern alternative to serial based rig control by [Expert Electronics](https://eesdr.com/en/), based on WebSockets. 
 
 Hopefully more manufactures adopt this excellent protocol that supports multiple clients!
 
