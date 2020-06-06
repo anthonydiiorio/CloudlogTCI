@@ -43,7 +43,7 @@ type Radio struct {
 }
 
 func loadConfig(cfg Config) {
-	yamlFile, err := ioutil.ReadFile("dev-config.yaml")
+	yamlFile, err := ioutil.ReadFile("config.yaml")
 	err = yaml.Unmarshal([]byte(yamlFile), &config)
 	if err != nil {
 		log.Fatalf("error: %v", err)
