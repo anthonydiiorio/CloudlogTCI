@@ -11,6 +11,7 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -43,7 +44,8 @@ type Radio struct {
 }
 
 func loadConfig(cfg Config) {
-	yamlFile, err := ioutil.ReadFile("config.yaml")
+	configFile, _ := filepath.Abs("config.yaml")
+	yamlFile, err := ioutil.ReadFile(configFile)
 	err = yaml.Unmarshal([]byte(yamlFile), &config)
 	if err != nil {
 		log.Fatalf("error: %v", err)

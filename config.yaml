@@ -2,7 +2,7 @@
 # Generate a Read/Write API Key cloudlog/api/help
 cloudlog:
   server: "https://log.example.com"
-  api: "api-key"
+  api: "apikey"
 
 # Enable TCI Server:
 # Options -> TCI -> Enable
