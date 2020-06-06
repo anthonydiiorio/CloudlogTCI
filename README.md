@@ -7,4 +7,4 @@ TCI bridge for Cloudlog
 
 > go build cloudlogtci.go
 
-Edit the config.yaml file with your Cloudlog server and R/W API key
+Edit `config.yaml` with your Cloudlog server and R/W API key
