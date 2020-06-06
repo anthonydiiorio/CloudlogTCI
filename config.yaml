@@ -1,0 +1,11 @@
+# Cloudlog Setup
+# Generate a Read/Write API Key cloudlog/api/help
+cloudlog:
+  server: "https://log.example.com"
+  api: "api-key"
+
+# Enable TCI Server:
+# Options -> TCI -> Enable
+# host:port
+tci:
+  host: "127.0.0.1:40001"
