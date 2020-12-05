@@ -6,8 +6,6 @@ TCI bridge for [Cloudlog](https://github.com/magicbug/Cloudlog), an excellent we
 
 TCI is a modern alternative to serial based rig control by [Expert Electronics](https://eesdr.com/en/), based on WebSockets. 
 
-Hopefully more manufactures adopt this excellent protocol that supports multiple clients!
-
 ![Terminal](/screenshots/term.png)
 
 ## Instructions
