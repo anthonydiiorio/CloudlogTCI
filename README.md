@@ -1,5 +1,5 @@
-[![](https://img.shields.io/github/v/release/tanilolli/CloudlogTCI)](https://github.com/tanilolli/CloudlogTCI/releases)
-![](https://img.shields.io/github/license/tanilolli/CloudlogTCI)
+[![](https://img.shields.io/github/v/release/anthonydiiorio/CloudlogTCI)](https://github.com/anthonydiiorio/CloudlogTCI/releases)
+![](https://img.shields.io/github/license/anthonydiiorio/CloudlogTCI)
 
 # CloudlogTCI
 TCI bridge for [Cloudlog](https://github.com/magicbug/Cloudlog), an excellent web based loggin software for amateur radio.
