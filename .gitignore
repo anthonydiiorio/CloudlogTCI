@@ -6,3 +6,4 @@ cloudlogtci
 build-macos-arm64.ps1
 build-macos-amd64.ps1
 build-linux-amd64.ps1
+build-windows-amd64.ps1
