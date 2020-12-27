@@ -2,3 +2,6 @@ build/*
 dev-config.yaml
 cloudlogtci.exe
 cloudlogtci
+build-macos-arm64.ps1
+build-macos-amd64.ps1
+build-linux-amd64.ps1

@@ -18,11 +18,5 @@ Both VFOs will be available in Cloudlog under the Station/Radio dropdown.
 
 ## Build
 
-Go get dependencies
-
-> go get ./...
-
-Build
-
-> go build cloudlogtci.go
+> go build
 
