@@ -248,7 +248,7 @@ func main() {
 
 	loadConfig(config)
 
-	fmt.Println("CloudLogTCI v0.1")
+	fmt.Println("CloudLogTCI v0.2")
 	fmt.Println("CloudLog Server:", config.CloudLog.Server)
 	fmt.Println("TCI Server:", config.TCI.Host)
 
