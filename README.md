@@ -21,4 +21,3 @@ Both VFOs will be available in Cloudlog under the Station/Radio dropdown.
 > go build
 
 Note: For Apple Silicon Macs you must build with go 1.6 or higher.
-
