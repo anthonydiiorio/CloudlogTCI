@@ -21,3 +21,12 @@ Both VFOs will be available in Cloudlog under the Station/Radio dropdown.
 > go build
 
 Note: For Apple Silicon Macs you must build with Go 1.6 or higher.
+
+## Mac Users
+
+Note for Mac users you must run the following command in terminal or the app will not launch if you downloaded from the release page:
+
+```bash
+cd /wherever/you/extracted/CloudlogTCI
+xattr -c CloudlogTCI
+```
