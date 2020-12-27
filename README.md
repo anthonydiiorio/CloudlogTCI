@@ -14,6 +14,8 @@ Download latest release for Windows: [/releases](https://github.com/tanilolli/Cl
 
 Edit `config.yaml` with your Cloudlog server URL and R/W API key
 
+Enable TCI in ExpertSDR
+
 Both VFOs will be available in Cloudlog under the Station/Radio dropdown.
 
 ## Build
