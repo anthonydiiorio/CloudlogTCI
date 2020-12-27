@@ -44,7 +44,11 @@ type Radio struct {
 }
 
 func loadConfig(cfg Config) {
-	configFile, _ := filepath.Abs("config.yaml")
+	ex, err := os.Executable()
+	if err != nil {
+		log.Println(err)
+	}
+	configFile := filepath.Dir(ex) + "/config.yaml"
 	yamlFile, err := ioutil.ReadFile(configFile)
 	err = yaml.Unmarshal([]byte(yamlFile), &config)
 	if err != nil {
