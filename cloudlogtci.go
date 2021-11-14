@@ -58,18 +58,6 @@ func loadConfig(cfg Config) {
 	}
 }
 
-func rxString(rx Radio) string {
-	f := ""
-	if rx.Split {
-		f = rx.VfoB
-	} else {
-		f = rx.VfoA
-	}
-
-	s := rx.Name + " VFO: " + f + " " + rx.Mode
-	return s
-}
-
 func updateVFO(rx string, vfo string, freq string) {
 	//vfo:0,0,375500
 	if rx == "0" { //RX1 (0)
@@ -166,10 +154,10 @@ func sendTCI(c *websocket.Conn, message string) {
 		log.Println("write close:", err)
 		return
 	}
-	return
 }
 
 func updateCloudLog(rx Radio) {
+
 	var frequency string
 	//Only send TX VFO
 	if rx.Split {
@@ -178,14 +166,15 @@ func updateCloudLog(rx Radio) {
 		frequency = rx.VfoA
 	}
 
-	//{"key":"YOUR_API_KEY", "radio":"FT-950","frequency":14075,"mode":"SSB","timestamp":"2012/04/07 16:47"}
+	timestamp := time.Now().UTC().Format("2006/01/02 15:04:05")
+
+	//{"key":"YOUR_API_KEY", "radio":"FT-950","frequency":14075,"mode":"SSB","timestamp":"2006/01/02 15:04:05"}
 	requestBody, err := json.Marshal(map[string]string{
 		"key":       config.CloudLog.API,
 		"radio":     rx.Name,
 		"frequency": frequency,
 		"mode":      rx.Mode,
-		//"timestamp": "",
-
+		"timestamp": timestamp,
 	})
 	if err != nil {
 		log.Fatalf("error: %v", err)
@@ -219,9 +208,6 @@ func updateCloudLog(rx Radio) {
 	if string(body) != "{\"status\":\"success\"}" || debug {
 		fmt.Println(string(body))
 	}
-
-	//Print RX Data
-	//fmt.Println(rxString(rx))
 }
 
 func connectTCI(u url.URL) *websocket.Conn {
@@ -265,7 +251,7 @@ func main() {
 	defer c.Close()
 
 	sendTCI(c, "CloudLogTCI Connected")
-	log.Println("Connected to TCI:", time.Now())
+	log.Println("Connected to TCI:", time.Now().UTC().Format("2006/01/02 15:04:05"))
 
 	done := make(chan struct{})
 
@@ -278,7 +264,7 @@ func main() {
 				log.Println("Disconnected from TCI")
 				c = connectTCI(u)
 				sendTCI(c, "CloudLogTCI Reconnected")
-				log.Println("Reconnected to TCI", time.Now())
+				log.Println("Reconnected to TCI", time.Now().UTC().Format("2006/01/02 15:04:05"))
 			}
 			// Print all messages
 			//log.Printf("recv: %s", message)
