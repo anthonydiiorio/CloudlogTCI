@@ -1,6 +1,7 @@
 build/*
 !build/*.sh
 dev-config.yaml
+dev.yaml
 cloudlogtci.exe
 cloudlogtci
 build-macos-arm64.ps1
