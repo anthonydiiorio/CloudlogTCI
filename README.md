@@ -21,8 +21,9 @@ Both VFOs will be now available in Cloudlog under the Station/Radio dropdown.
 
 ## Build
 
-> go build
-
+```bash
+go build
+```
 Note: For Apple Silicon Macs you must build with Go 1.6 or higher.
 
 ## Mac Users
