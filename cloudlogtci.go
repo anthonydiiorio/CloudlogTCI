@@ -244,7 +244,7 @@ func main() {
 
 	loadConfig(config)
 
-	fmt.Println("CloudLogTCI 2021.11.0")
+	fmt.Println("CloudLogTCI 2023.10.25")
 	fmt.Println("CloudLog Server:", config.CloudLog.Server)
 	fmt.Println("TCI Server:", config.TCI.Host)
 
