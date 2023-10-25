@@ -122,27 +122,37 @@ func updateMode(rx string, rxMode string) {
 }
 
 func fixMode(rxMode string) string {
+	rxMode = strings.ToUpper(rxMode)
+
+	// Thetis Modes: AM,SAM,DSB,LSB,USB,NFM,FM,DIGL,DIGU,CWL, CWU, CW;
+	// No valid modes are exist for generic digital
 	switch rxMode {
-	case "lsb":
-		rxMode = "SSB"
-	case "usb":
-		rxMode = "SSB"
-	case "digil":
-		rxMode = "SSB"
-	case "digiu":
-		rxMode = "SSB"
-	case "dsb":
+	case "CWL": //Thetis
+		rxMode = "CW"
+	case "CWU": //Thetis
+		rxMode = "CW"
+	//case "LSB":
+	//	rxMode = "SSB"
+	//case "USB":
+	//	rxMode = "SSB"
+	case "DIGIL": //ExpertSDR
+		rxMode = "LSB"
+	case "DIGL": //Thetis
+		rxMode = "LSB"
+	case "DIGIU": //ExpertSDR
+		rxMode = "USB"
+	case "DIGU": //Thetis
+		rxMode = "USB"
+	case "DSB":
 		rxMode = "AM"
-	case "sam":
+	case "SAM":
 		rxMode = "AM"
-	case "nfm":
+	case "DRM":
+		rxMode = "AM"
+	case "NFM":
 		rxMode = "FM"
-	case "wfm":
+	case "WFM":
 		rxMode = "FM"
-	case "drm":
-		rxMode = "AM"
-	default:
-		rxMode = strings.ToUpper(rxMode)
 	}
 	return rxMode
 }
