@@ -2,11 +2,9 @@
 ![](https://img.shields.io/github/license/anthonydiiorio/CloudlogTCI)
 
 # CloudlogTCI 📻
-TCI bridge for [Cloudlog](https://github.com/magicbug/Cloudlog), an excellent web based logging software for amateur radio.
+TCI bridge for [Cloudlog](https://github.com/magicbug/Cloudlog) and [Wavelog](https://github.com/wavelog/wavelog).
 
 TCI is a modern alternative to serial based rig control by [Expert Electronics](https://eesdr.com/en/), based on WebSockets. 
-
-CloudlogTCI allows you to connect your SunSDR to Cloudlog with the TCI protocol.
 
 ![Terminal](/screenshots/term.png)
 
@@ -17,7 +15,7 @@ CloudlogTCI allows you to connect your SunSDR to Cloudlog with the TCI protocol.
 3. Edit `config.yaml` with your Cloudlog server URL and Read/Write API key
 4. Enable TCI in ExpertSDR
 
-Both VFOs will be now available in Cloudlog under the Station/Radio dropdown.
+Both VFOs will be now available under the Station/Radio dropdown and the Hardware Interfaces page.
 
 ## Build
 
