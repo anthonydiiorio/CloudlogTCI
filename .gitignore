@@ -1,5 +1,5 @@
 build/*
-!build/*.sh
+!build/*.bat
 dev-config.yaml
 dev.yaml
 cloudlogtci.exe
