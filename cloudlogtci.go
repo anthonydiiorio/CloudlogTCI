@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -23,7 +23,7 @@ import (
 var config Config
 var rx1, rx2 Radio
 
-// Config from YAML
+// Config  Struct
 type Config struct {
 	CloudLog struct {
 		Server string `yaml:"server"`
@@ -43,18 +43,28 @@ type Radio struct {
 	Split bool
 }
 
-func loadConfig(cfg Config) {
+// Loads config from config.yaml in the same directory as the executable
+func loadConfig(cfg *Config) {
 	ex, err := os.Executable()
 	if err != nil {
 		log.Println(err)
 	}
+
+	// Read YAML file
 	configFile := filepath.Dir(ex) + "/config.yaml"
-	yamlFile, err := ioutil.ReadFile(configFile)
-	err = yaml.Unmarshal([]byte(yamlFile), &config)
+	yamlFile, err := os.ReadFile(configFile)
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		log.Fatalf("error reading config file: %v", err)
+	}
+
+	// Unmarshal YAML
+	err = yaml.Unmarshal([]byte(yamlFile), cfg)
+	if err != nil {
+		log.Fatalf("error unmarshaling YAML: %v", err)
 	} else {
-		cfg.CloudLog.Server = strings.TrimRight(cfg.CloudLog.Server, "/")
+		// Remove trailing slash and index.php from CloudLog server URL
+		cfg.CloudLog.Server = strings.TrimSuffix(cfg.CloudLog.Server, "/")
+		cfg.CloudLog.Server = strings.TrimSuffix(cfg.CloudLog.Server, "/index.php")
 	}
 }
 
@@ -91,6 +101,7 @@ func updateVFO(rx string, vfo string, freq string) {
 	}
 }
 
+// Handles split operation
 func updateSplit(rx string, rxSplit string) {
 	if rx == "0" { //RX1
 		b, err := strconv.ParseBool(rxSplit)
@@ -121,6 +132,7 @@ func updateMode(rx string, rxMode string) {
 	}
 }
 
+// Fixes mode names for CloudLog
 func fixMode(rxMode string) string {
 	rxMode = strings.ToUpper(rxMode)
 
@@ -208,7 +220,7 @@ func updateCloudLog(rx Radio) {
 
 	defer response.Body.Close()
 
-	body, err := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -220,6 +232,7 @@ func updateCloudLog(rx Radio) {
 	}
 }
 
+// Connect to TCI server
 func connectTCI(u url.URL) *websocket.Conn {
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
@@ -242,9 +255,9 @@ func connectTCI(u url.URL) *websocket.Conn {
 
 func main() {
 
-	loadConfig(config)
+	loadConfig(&config)
 
-	fmt.Println("CloudLogTCI 2023.10.25")
+	fmt.Println("CloudLogTCI 2025.2.10")
 	fmt.Println("CloudLog Server:", config.CloudLog.Server)
 	fmt.Println("TCI Server:", config.TCI.Host)
 
