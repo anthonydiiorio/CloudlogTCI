@@ -10,20 +10,17 @@ TCI is a modern alternative to serial based rig control by [Expert Electronics](
 
 ## Instructions
 
-1. Download latest release from: [Releases](https://github.com/tanilolli/CloudlogTCI/releases)
-2. Create a Read/Write API key in Cloudlog: [Cloudlog/wiki/API](https://github.com/magicbug/Cloudlog/wiki/API)
-3. Edit `config.yaml` with your Cloudlog server URL and Read/Write API key
-4. Enable TCI in ExpertSDR
+1. Download the latest Windows release from: [Releases](https://github.com/tanilolli/CloudlogTCI/releases), or build from source
+3. Create a Read/Write API key in Cloudlog: [Cloudlog/wiki/API](https://github.com/magicbug/Cloudlog/wiki/API)
+4. Edit `config.yaml` with your Cloudlog server URL and Read/Write API key
+5. Enable TCI in ExpertSDR
 
 Both VFOs will be now available under the Station/Radio dropdown and the Hardware Interfaces page.
 
-## Build
+## Build from source
+
+Install Go https://go.dev/
 
 ```bash
 go build
 ```
-Note: For Apple Silicon Macs you must build with Go 1.6 or higher.
-
-## Mac Users
-
-**The recommended way to to install on macOS is to build from source.**
