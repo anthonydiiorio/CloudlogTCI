@@ -63,8 +63,8 @@ func loadConfig(cfg *Config) {
 		log.Fatalf("error unmarshaling YAML: %v", err)
 	} else {
 		// Remove trailing slash and index.php from CloudLog server URL
-		cfg.CloudLog.Server = strings.TrimRight(cfg.CloudLog.Server, "/")
-		cfg.CloudLog.Server = strings.TrimRight(cfg.CloudLog.Server, "/index.php")
+		cfg.CloudLog.Server = strings.TrimSuffix(cfg.CloudLog.Server, "/")
+		cfg.CloudLog.Server = strings.TrimSuffix(cfg.CloudLog.Server, "/index.php")
 	}
 }
 
@@ -257,7 +257,7 @@ func main() {
 
 	loadConfig(&config)
 
-	fmt.Println("CloudLogTCI 2025.2.10")
+	fmt.Println("CloudLogTCI 2025.5.13")
 	fmt.Println("CloudLog Server:", config.CloudLog.Server)
 	fmt.Println("TCI Server:", config.TCI.Host)
 
