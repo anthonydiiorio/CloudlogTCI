@@ -15,7 +15,17 @@ TCI is a modern alternative to serial based rig control by [Expert Electronics](
 4. Edit `config.yaml` with your Cloudlog server URL and Read/Write API key
 5. Enable TCI in ExpertSDR
 
+![TCI](/screenshots/tci.png)
+
 Both VFOs will be now available under the Station/Radio dropdown and the Hardware Interfaces page.
+
+### Bandmap 🗺️
+
+New! If you want to use the Bandmap feature in Wavelog set `bandmap: true` in the config file. To control RX2 from Wavelog, set the port to 54322 in the Hardware Interfaces settings.
+
+![Hardware Interfaces](/screenshots/bandmap-settings.png)
+
+If you have a port conflict, change the defaults for `rx1port` and `rx2port` in the config file. Then update the CAT URL in Wavelog.
 
 ## Build from source
 

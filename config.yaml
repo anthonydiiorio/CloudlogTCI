@@ -1,11 +1,18 @@
 # Cloudlog Setup
 # Generate a Read/Write API Key cloudlog/api/help
+# Set bandmap: true if you want to set the VFO from the Wavelog Bandmap
+# Default endpoint is http://127.0.0.1:54321 for RX1 
 cloudlog:
   server: "https://log.example.com"
   api: "apikey"
+  bandmap: true
+  rx1port: 54321 # RX1 port for Bandmap
+  rx2port: 54322 # RX2 port for Bandmap
 
 # Enable TCI Server:
-# Options -> TCI -> Enable
+# Click TCI button on the bottom menu bar in ExpertSDR to start the server
+# Right click the TCI button to see the port number
+#
 # host:port
 tci:
-  host: "127.0.0.1:40001"
+  host: "127.0.0.1:50001"

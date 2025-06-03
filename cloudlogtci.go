@@ -26,8 +26,11 @@ var rx1, rx2 Radio
 // Config  Struct
 type Config struct {
 	CloudLog struct {
-		Server string `yaml:"server"`
-		API    string `yaml:"api"`
+		Server  string `yaml:"server"`
+		API     string `yaml:"api"`
+		Bandmap bool   `yaml:"bandmap"`
+		RX1Port int    `yaml:"rx1port"`
+		RX2Port int    `yaml:"rx2port"`
 	} `yaml:"cloudlog"`
 	TCI struct {
 		Host string `yaml:"host"`
@@ -254,10 +257,18 @@ func connectTCI(u url.URL) *websocket.Conn {
 }
 
 func main() {
-
 	loadConfig(&config)
 
-	fmt.Println("CloudLogTCI 2025.5.13")
+	// Set default RX1 port if not specified
+	if config.CloudLog.RX1Port == 0 {
+		config.CloudLog.RX1Port = 54321
+	}
+	// Set default RX2 port if not specified
+	if config.CloudLog.RX2Port == 0 {
+		config.CloudLog.RX2Port = 54322
+	}
+
+	fmt.Println("CloudLogTCI 2025.6.3")
 	fmt.Println("CloudLog Server:", config.CloudLog.Server)
 	fmt.Println("TCI Server:", config.TCI.Host)
 
@@ -275,6 +286,45 @@ func main() {
 
 	sendTCI(c, "CloudLogTCI Connected")
 	log.Println("Connected to TCI:", time.Now().UTC().Format("2006/01/02 15:04:05"))
+
+	// Start HTTP server for Wavelog Bandmap
+	if config.CloudLog.Bandmap {
+		log.Println("Starting Bandmap")
+		// Create a reusable handler generator for RX index
+		createHandler := func(rx int) http.Handler {
+			return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+				w.WriteHeader(http.StatusOK)
+				_, _ = w.Write([]byte{})
+
+				freqStr := strings.TrimPrefix(r.URL.Path, "/")
+				if freq, err := strconv.Atoi(freqStr); err == nil {
+					log.Printf("Tuning RX%d to: %d", rx+1, freq)
+					sendTCI(c, fmt.Sprintf("vfo:%d,0,%d;", rx, freq))
+				} else {
+					log.Printf("Invalid RX%d frequency: %s", rx+1, freqStr)
+				}
+			})
+		}
+
+		// Start RX1 server
+		go func() {
+			addr := fmt.Sprintf(":%d", config.CloudLog.RX1Port)
+			log.Printf("Listening on %s for RX1", addr)
+			if err := http.ListenAndServe(addr, createHandler(0)); err != nil {
+				log.Fatalf("HTTP server (RX1) error: %v", err)
+			}
+		}()
+
+		// Start RX2 server
+		go func() {
+			addr := fmt.Sprintf(":%d", config.CloudLog.RX2Port)
+			log.Printf("Listening on %s for RX2", addr)
+			if err := http.ListenAndServe(addr, createHandler(1)); err != nil {
+				log.Fatalf("HTTP server (RX2) error: %v", err)
+			}
+		}()
+	}
 
 	done := make(chan struct{})
 
@@ -300,16 +350,15 @@ func main() {
 				rx1.Name = tciArray[1] + " RX1"
 				rx2.Name = tciArray[1] + " RX2"
 			case "vfo":
-				//vfo:0,0,375500
+				// vfo:0,0,14074000
 				tciValue := strings.Split(tciArray[1], ",")
-				//RX, VFO, Freq
 				updateVFO(tciValue[0], tciValue[1], tciValue[2])
 			case "split_enable":
 				//split_enable:0,true/false;
 				tciValue := strings.Split(tciArray[1], ",")
 				updateSplit(tciValue[0], tciValue[1])
 			case "modulation":
-				//modulation:0,lsb;
+				//modulation:0,LSB;
 				tciValue := strings.Split(tciArray[1], ",")
 				updateMode(tciValue[0], tciValue[1])
 			}
