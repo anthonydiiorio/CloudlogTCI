@@ -21,7 +21,7 @@ Both VFOs will be now available under the Station/Radio dropdown and the Hardwar
 
 ### Bandmap 🗺️
 
-New! If you want to use the Bandmap feature in Wavelog set `bandmap: true` in the config file. To control RX2 from Wavelog, set the port to 54322 in the Hardware Interfaces settings.
+New! If you want to use the Bandmap feature in Wavelog set `bandmap: true` in the config file. To control RX2 from Wavelog, set the port to 54322 in the Hardware Interfaces settings. Click on the callsign in the bandmap to tune the radio.
 
 ![Hardware Interfaces](/screenshots/bandmap-settings.png)
 
